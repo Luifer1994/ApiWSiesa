@@ -12,6 +12,7 @@ class ListUserController extends Controller
     public function ListUserForDocument(Request $request)
     {
         try {
+            
             $this->validate($request, [
                 'document_client' => 'required|numeric',
                 'user' => 'required|email',
@@ -20,7 +21,7 @@ class ListUserController extends Controller
             $user = User::whereEmail($request["user"])->first();
 
             if ($user && Hash::check($request["pass"], $user->password)) {
-                
+
                 $cliente = new nusoap_client("http://131.0.171.99/WSUNOEE/wsunoee.asmx?wsdl", true);
 
                 $xml = "<Consulta>" .
