@@ -11,31 +11,29 @@ class ListUserController extends Controller
 {
     public function ListUserForDocument(Request $request)
     {
+        $this->validate($request, [
+            'document_client' => 'required|numeric',
+            'user' => 'required|email',
+            'pass' => 'required',
+        ]);
+        $user = User::whereEmail($request["user"])->first();
 
-
-            $this->validate($request, [
-                'document_client' => 'required|numeric',
-                'user' => 'required|email',
-                'pass' => 'required',
-            ]);
-            $user = User::whereEmail($request["user"])->first();
-             try {
-
+        try {
             if ($user && Hash::check($request["pass"], $user->password)) {
 
                 $cliente = new nusoap_client("http://131.0.171.99/WSUNOEE/wsunoee.asmx?wsdl", true);
 
-                $xml = "<Consulta>" .
-                            "<NombreConexion>unoee_invercomer</NombreConexion>" .
-                            "<IdCia>1</IdCia>" .
-                            "<IdProveedor>MT</IdProveedor>" .
-                            "<IdConsulta>CONSULTA_CLIENTE_DOCUMENTO</IdConsulta>" .
-                            "<Usuario>osalcedo</Usuario>" .
-                            "<Clave>Auror@02</Clave>" .
-                            "<Parametros>" .
-                            "<documento>" . $request["document_client"] . "</documento>" .
-                            "</Parametros>" .
-                        "</Consulta>";
+                $xml = "<Consulta>
+                    <NombreConexion>unoee_invercomer</NombreConexion>
+                    <IdCia>1</IdCia>
+                    <IdProveedor>MT</IdProveedor>
+                    <IdConsulta>CONSULTA_CLIENTE_DOCUMENTO</IdConsulta>
+                    <Usuario>osalcedo</Usuario>
+                    <Clave>Auror@02</Clave>
+                    <Parametros>
+                    <documento>" . $request["document_client"] . "</documento>
+                    </Parametros>
+                    </Consulta>";
 
                 $params = ['pvstrxmlParametros' => $xml];
 

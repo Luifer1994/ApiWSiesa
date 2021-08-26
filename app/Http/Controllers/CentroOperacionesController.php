@@ -12,18 +12,17 @@ class CentroOperacionesController extends Controller
        //return $request->id_cia;
         $cliente = new nusoap_client("http://131.0.171.99/WSUNOEE/wsunoee.asmx?wsdl", true);
 
-                $xml = "<Consulta>" .
-                            "<NombreConexion>unoee_invercomer</NombreConexion>" .
-                            "<IdCia>1</IdCia>" .
-                            "<IdProveedor>Mt</IdProveedor>" .
-                            "<IdConsulta>listar_centrosop</IdConsulta>" .
-                            "<Usuario>osalcedo</Usuario>" .
-                            "<Clave>Auror@02</Clave>" .
-                            "<Parametros>" .
-                            "<id_cia>" . $request->id_cia . "</id_cia>" .
-                            "</Parametros>" .
-                        "</Consulta>";
-
+                $xml = "<Consulta>
+                            <NombreConexion>unoee_invercomer</NombreConexion>
+                            <IdCia>1</IdCia>
+                            <IdProveedor>Mt</IdProveedor>
+                            <IdConsulta>listar_centrosop</IdConsulta>
+                            <Usuario>osalcedo</Usuario>
+                            <Clave>Auror@02</Clave>
+                            <Parametros>
+                            <id_cia>" . $request->id_cia . "</id_cia>
+                            </Parametros>
+                        </Consulta>";
                 $params = ['pvstrxmlParametros' => $xml];
 
                 $result = $cliente->call('EjecutarConsultaXML', $params);
