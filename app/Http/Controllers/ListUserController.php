@@ -37,7 +37,6 @@ class ListUserController extends Controller
 
                 $params = ['pvstrxmlParametros' => $xml];
 
-
                 $result = $cliente->call('EjecutarConsultaXML', $params);
                 $client = $result["EjecutarConsultaXMLResult"]["diffgram"];
 
@@ -57,7 +56,7 @@ class ListUserController extends Controller
                 return response()->json([
                     'res' => false,
                     'message' => 'Usuario o password incorrecta',
-                ], 400);
+                ], 401);
             }
         } catch (\Throwable $th) {
             return response()->json([

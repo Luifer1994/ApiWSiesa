@@ -35,3 +35,6 @@ $router->post('/clients', [
 $router->post('/centro_op/list', [
     'as' => 'centro_op', 'uses' => 'CentroOperacionesController@List',
 ]);
+$router->post('/bodegas_existencia', [
+    'as' => 'bodegas_existencia', 'uses' => 'BodegasController@Existence',
+]);
