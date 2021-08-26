@@ -23,7 +23,6 @@ class CentroOperacionesController extends Controller
                             <id_cia>" . $request->id_cia . "</id_cia>
                             </Parametros>
                         </Consulta>";
-
                 $params = ['pvstrxmlParametros' => $xml];
 
                 $result = $cliente->call('EjecutarConsultaXML', $params);
