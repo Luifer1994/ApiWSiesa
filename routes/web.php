@@ -28,6 +28,10 @@ $router->get('/', function () use ($router) {
 });
 
 
+
 $router->post('/clients', [
     'as' => 'clientes', 'uses' => 'ListUserController@ListUserForDocument',
+]);
+$router->post('/centro_op/list', [
+    'as' => 'centro_op', 'uses' => 'CentroOperacionesController@List',
 ]);

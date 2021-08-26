@@ -11,14 +11,15 @@ class ListUserController extends Controller
 {
     public function ListUserForDocument(Request $request)
     {
-        try {
-            
+
+
             $this->validate($request, [
                 'document_client' => 'required|numeric',
                 'user' => 'required|email',
                 'pass' => 'required',
             ]);
             $user = User::whereEmail($request["user"])->first();
+             try {
 
             if ($user && Hash::check($request["pass"], $user->password)) {
 
@@ -37,6 +38,7 @@ class ListUserController extends Controller
                         "</Consulta>";
 
                 $params = ['pvstrxmlParametros' => $xml];
+
 
                 $result = $cliente->call('EjecutarConsultaXML', $params);
                 $client = $result["EjecutarConsultaXMLResult"]["diffgram"];
