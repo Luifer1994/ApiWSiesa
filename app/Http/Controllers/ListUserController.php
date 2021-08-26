@@ -11,7 +11,6 @@ class ListUserController extends Controller
 {
     public function ListUserForDocument(Request $request)
     {
-
         $this->validate($request, [
             'document_client' => 'required|numeric',
             'user' => 'required|email',
@@ -37,6 +36,7 @@ class ListUserController extends Controller
                     </Consulta>";
 
                 $params = ['pvstrxmlParametros' => $xml];
+
 
                 $result = $cliente->call('EjecutarConsultaXML', $params);
                 $client = $result["EjecutarConsultaXMLResult"]["diffgram"];
